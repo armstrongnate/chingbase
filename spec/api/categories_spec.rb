@@ -23,7 +23,7 @@ describe API::V1 do
           {
             id: @category.id,
             name: @category.name,
-            amount: @category.amount
+            amount_in_dollars: @category.amount_in_dollars
           }
         ].to_json)
       end

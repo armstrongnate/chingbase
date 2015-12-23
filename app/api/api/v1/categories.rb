@@ -5,7 +5,7 @@ module API
       class Category < Grape::Entity
         expose :id
         expose :name
-        expose :amount
+        expose :amount_in_dollars
       end
     end
 
