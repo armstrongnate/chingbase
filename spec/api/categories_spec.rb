@@ -12,4 +12,22 @@ describe API::V1 do
     end
   end
 
+  context 'when a category exists' do
+    describe "GET #{categories_path}" do
+      it 'returns the category' do
+        @category = create(:category)
+
+        get categories_path
+        expect(response.status).to eq(200)
+        expect(response.body).to eq([
+          {
+            id: @category.id,
+            name: @category.name,
+            amount: @category.amount
+          }
+        ].to_json)
+      end
+    end
+  end
+
 end
