@@ -16,6 +16,19 @@ module API
           categories = Category.all
           present categories, with: Entities::Category
         end
+
+        desc 'Create a category'
+        params do
+          requires :name, type: String, allow_blank: false, desc: 'The name of the category'
+          requires :amount_in_dollars, type: String, allow_blank: false, desc: 'The monthly budget for this category in dollars'
+        end
+        post do
+          category = Category.create!({
+            name: params[:name],
+            amount_in_dollars: params[:amount_in_dollars]
+          })
+          present category, with: Entities::Category
+        end
       end
     end
 

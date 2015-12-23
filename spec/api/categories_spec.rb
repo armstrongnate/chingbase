@@ -30,4 +30,31 @@ describe API::V1 do
     end
   end
 
+  context 'with valid attributes' do
+    def valid_attributes
+      { name: 'Groceries', amount_in_dollars: '400.00' }
+    end
+
+    describe "POST #{categories_path}" do
+      it 'creates a new category' do
+        expect {
+          post categories_path, valid_attributes
+        }.to change(Category, :count).by(1)
+      end
+
+      it 'has the correct status code' do
+        post categories_path, valid_attributes
+        expect(response.status).to eq(201)
+      end
+
+      it 'has the newly created category' do
+        post categories_path, valid_attributes
+        json = JSON.parse(response.body)
+        expect(json['id']).not_to be_nil
+        expect(json['name']).to eq('Groceries')
+        expect(json['amount_in_dollars']).to eq('400.00')
+      end
+    end
+  end
+
 end
